@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="工作笔记,环境搭建," />
 
 
 
@@ -81,13 +81,23 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="spotless·heart">
-<meta property="og:url" content="https://rhyscheung.github.io/index.html">
+<meta name="description" content="Runners容器服务配置 (root用户安装) 步骤  下载runner 点此下载  将下载的文件上传到服务器 重命名 1cp gitlab-ci-multi-runner-linux-amd64.htm  gitlab-ci-multi-runner  赋予执行权限 1chmod +x gitlab-ci-multi-runner  创建build目录（工作目录属于实际情况需求的用户，例如：">
+<meta name="keywords" content="工作笔记,环境搭建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitlab-CI搭建笔记">
+<meta property="og:url" content="https://rhyscheung.github.io/blog/2018/02/07/Gitlab-CI/index.html">
 <meta property="og:site_name" content="spotless·heart">
+<meta property="og:description" content="Runners容器服务配置 (root用户安装) 步骤  下载runner 点此下载  将下载的文件上传到服务器 重命名 1cp gitlab-ci-multi-runner-linux-amd64.htm  gitlab-ci-multi-runner  赋予执行权限 1chmod +x gitlab-ci-multi-runner  创建build目录（工作目录属于实际情况需求的用户，例如：">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://rhyscheung.github.io/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/gitlabrunner_downloadFile.png">
+<meta property="og:image" content="https://rhyscheung.github.io/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/checkStatus.png">
+<meta property="og:image" content="https://rhyscheung.github.io/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/register.png">
+<meta property="og:image" content="https://rhyscheung.github.io/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/configEnableCI.png">
+<meta property="og:updated_time" content="2018-02-23T07:53:31.833Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spotless·heart">
+<meta name="twitter:title" content="Gitlab-CI搭建笔记">
+<meta name="twitter:description" content="Runners容器服务配置 (root用户安装) 步骤  下载runner 点此下载  将下载的文件上传到服务器 重命名 1cp gitlab-ci-multi-runner-linux-amd64.htm  gitlab-ci-multi-runner  赋予执行权限 1chmod +x gitlab-ci-multi-runner  创建build目录（工作目录属于实际情况需求的用户，例如：">
+<meta name="twitter:image" content="https://rhyscheung.github.io/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/gitlabrunner_downloadFile.png">
 
 
 
@@ -117,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://rhyscheung.github.io/"/>
+  <link rel="canonical" href="https://rhyscheung.github.io/blog/2018/02/07/Gitlab-CI/"/>
 
 
 
 
 
-  <title>spotless·heart</title>
+  <title>Gitlab-CI搭建笔记 | spotless·heart</title>
   
 
 
@@ -142,8 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,9 +245,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -268,9 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/" itemprop="url">Gitlab-CI搭建笔记</a></h1>
+          <h1 class="post-title" itemprop="name headline">Gitlab-CI搭建笔记</h1>
         
 
         <div class="post-meta">
@@ -342,34 +349,46 @@
       
 
       
-        
-          
-          
-Runners容器服务配置 (root用户安装) 步骤
+        <ol>
+<li><p><strong>Runners容器服务配置 <em>(root用户安装)</em> 步骤</strong></p>
+<ol>
+<li><p>下载runner<br><img src="/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/gitlabrunner_downloadFile.png" alt=""></p>
+<p><a href="https://gitlab-ci-multi-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-ci-multi-runner-linux-amd64" target="_blank" rel="noopener">点此下载</a></p>
+</li>
+<li>将下载的文件上传到服务器</li>
+<li><p>重命名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp gitlab-ci-multi-runner-linux-amd64.htm  gitlab-ci-multi-runner</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>赋予执行权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x gitlab-ci-multi-runner</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建build目录（工作目录属于实际情况需求的用户，例如：build目录在/var/gitlab下，该目录属于gitlab用户）</p>
+</li>
+<li><p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ci-multi-runner install --user=gitlab  --working-directory=/var/gitlab/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ci-multi-runner start</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ci-multi-runner status</span><br></pre></td></tr></table></figure>
+<p><img src="/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/checkStatus.png" alt=""></p>
+</li>
+<li><p>注册gitlab平台 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ci-multi-runner register</span><br></pre></td></tr></table></figure>
+<p><img src="/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/register.png" alt=""></p>
+</li>
+</ol>
+</li>
+<li><strong>gitlab配置</strong><br><img src="/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/configEnableCI.png" alt=""></li>
+<li><strong>pipeline部署</strong><ol>
+<li>根据实际需要，安装必须的工具，比如我的工程是用maven构建，则需要在runner所在的机器上安装maven，另外，因为pipelines要下载代码，所以git也是要安装的，同时要保证runner的机器具有访问git库地址的网络权限</li>
+<li>yml编写<br>定义stage及其job，搭建出项目所需的自动部署流水线</li>
+</ol>
+</li>
+<li><strong>参考文档</strong><br><a href="https://docs.gitlab.com/runner/" target="_blank" rel="noopener">https://docs.gitlab.com/runner/</a><br><a href="https://segmentfault.com/a/1190000010442764" target="_blank" rel="noopener">https://segmentfault.com/a/1190000010442764</a></li>
+</ol>
 
-下载runner
-点此下载
-
-将下载的文件上传到服务器
-重命名
-1cp gitlab-ci-multi-runner-linux-amd64.htm  gitlab-ci-multi-runner
-
-赋予执行权限
-1chmod +x gitlab-ci-multi-runner
-
-创建build目录（工作目录属于实际情况需求的用户，例如：build目录在/var/gitlab下，该目录属于gitlab用户）
-
-安装
-1gitlab-ci-multi-runner install --user=gitlab  --working-dir
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/spotless-heart.github.io/blog/2018/02/07/Gitlab-CI/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
       
     </div>
     
@@ -384,14 +403,22 @@ Runners容器服务配置 (root用户安装) 步骤
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/spotless-heart.github.io/tags/工作笔记/" rel="tag"><i class="fa fa-tag"></i> 工作笔记</a>
+          
+            <a href="/spotless-heart.github.io/tags/环境搭建/" rel="tag"><i class="fa fa-tag"></i> 环境搭建</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -401,10 +428,11 @@ Runners容器服务配置 (root用户安装) 步骤
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -412,6 +440,10 @@ Runners容器服务配置 (root用户安装) 步骤
 
 
           
+
+  
+
+
 
         </div>
         
@@ -652,6 +684,10 @@ Runners容器服务配置 (root用户安装) 步骤
 
 
   
+  <script type="text/javascript" src="/spotless-heart.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/spotless-heart.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
