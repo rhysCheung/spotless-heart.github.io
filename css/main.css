@@ -1333,7 +1333,7 @@ pre .javascript .function {
   border: 1px solid #ddd;
 }
 .posts-expand .post-body .fancybox img {
-  margin: 0 auto 25px;
+  margin: 0px 0px;
 }
 @media (max-width: 767px) {
   .posts-collapse {
